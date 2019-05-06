@@ -135,7 +135,7 @@ class BaseBuild
     url = github_download_url + actual_path
     puts "download url: #{url}"
     begin
-      `curl -sLJ #{url} -o #{TMP_FILE}`
+      `curl -sSLJ #{url} -o #{TMP_FILE}`
     rescue => e
       puts "download file #{url} with error: #{e}"
       exit(false)
