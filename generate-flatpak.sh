@@ -3,6 +3,8 @@
 SUCCESS_CODE=0
 ERROR_CODE=1
 
+source ~/.rvm/scripts/rvm
+
 ruby bitmarkd.rb
 
 if [ "$?" != "$SUCCESS_CODE" ]; then
