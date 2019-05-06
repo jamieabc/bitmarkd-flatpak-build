@@ -3,7 +3,7 @@ def directory = 'flatpak'
 def bitmarkd_flatpak_file = 'com.bitmark.bitmarkd.json'
 def recorderd_flatpak_file = 'com.bitmark.recorderd.json'
 
-node (label: "freebuilder") {
+node (label: "aws-builder") {
     stage('Checkout') {
         echo 'Checkout'
         dir(directory) {
