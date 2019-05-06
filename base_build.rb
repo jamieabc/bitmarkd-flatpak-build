@@ -94,14 +94,19 @@ class BaseBuild
   # generate hash with key: package name, value: sha-256 value
   def package_shasum
     hsh = {}
-    open(BITMARKD_GO_MOD_FILE) do |file|
-      file.each do |line|
-        truncated = line.strip.gsub(" // indirect", "")
-        next unless /^(github|golang)/.match? truncated
+    begin
+      open(BITMARKD_GO_MOD_FILE) do |file|
+        file.each do |line|
+          truncated = line.strip.gsub(" // indirect", "")
+          next unless /^(github|golang)/.match? truncated
 
-        url = pkg_url(truncated)
-        hsh[url] = url_file_shasum(url)
+          url = pkg_url(truncated)
+          hsh[url] = url_file_shasum(url)
+        end
       end
+    rescue => e
+      puts "getting package shasum error: #{e}"
+      exit(false)
     end
     remove_tmp_file
     hsh
@@ -152,8 +157,14 @@ class BaseBuild
   end
 
   def write_file(content)
-    File.open(output_file, 'w') do |file|
-      file.write(JSON.pretty_generate(content, indent: "  ", object_nl: "\n"))
+    puts "write to json file"
+    begin
+      File.open(output_file, 'w') do |file|
+        file.write(JSON.pretty_generate(content, indent: "  ", object_nl: "\n"))
+      end
+    rescue => e
+      puts "write json file error: #{e}"
+      exit(false)
     end
   end
 
@@ -189,17 +200,24 @@ class BaseBuild
   end
 
   def module_info(full_path, sha)
-    info = extract_path_info(full_path)
-    content = module_template
-    content[:name] = info[:repo]
-    content[:sources].first[:url] = github_download_url(full_path)
-    content[:sources].first[:sha256] = sha
-    content[:"build-commands"] = build_commands(info)
-    content
+    begin
+      info = extract_path_info(full_path)
+      content = module_template
+      content[:name] = info[:repo]
+      content[:sources].first[:url] = github_download_url(full_path)
+      content[:sources].first[:sha256] = sha
+      content[:"build-commands"] = build_commands(info)
+      content
+    rescue => e
+      puts "get package info error: #{e}"
+      exit(false)
+    end
   end
 
   def build
+    puts "generate flatpak config json file..."
     json = flatpak_content
+    puts "get module shasum..."
     package_shasum.each do |full_path, sha|
       json[:modules].push(module_info(full_path, sha))
     end
