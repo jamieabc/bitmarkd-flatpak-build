@@ -134,12 +134,19 @@ class BaseBuild
     actual_path = path.gsub("github.com/", "").gsub("golang.org/x", "golang")
     url = github_download_url + actual_path
     puts "download url: #{url}"
-    `curl -LJ #{url} -o #{TMP_FILE}`
+    begin
+      `curl -sLJ #{url} -o #{TMP_FILE}`
+    rescue => e
+      puts "download file #{url} with error: #{e}"
+      exit(false)
+    end
     sleep 1
   end
 
   def sha256
-    `shasum -a 256 #{TMP_FILE}`.split(" ").first
+    sha = `shasum -a 256 #{TMP_FILE}`.split(" ").first
+    puts "sha-256: #{sha}"
+    sha
   end
 
   def github_download_url(full_path)
