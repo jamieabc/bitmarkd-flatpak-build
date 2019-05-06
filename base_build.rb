@@ -224,7 +224,7 @@ class BaseBuild
   def build
     puts "generate flatpak config json file..."
     json = flatpak_content
-    puts "get module shasum..."
+    puts "get package sha-256 value"
     package_shasum.each do |full_path, sha|
       json[:modules].push(module_info(full_path, sha))
     end
