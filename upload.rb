@@ -20,7 +20,7 @@ puts "file #{file_name} with sha-256: #{sha256}"
 # setup metadata
 metadata = {
   'x-amz-meta-sha256' => sha256.to_s,
-  'x-amz-meta-date' => Time.now.to_s
+  'x-amz-meta-date' => Time.now.to_s,
   'x-amz-meta-version' => version
 }
 content_type = 'application/x-www-form-urlencoded; charset=utf-8'
