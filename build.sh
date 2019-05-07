@@ -31,7 +31,7 @@ if [ "$1" = "" ] || [ "$2" = "" ]; then
 fi
 
 FLATPAK_FILE=$1
-FLATPAK_REPO=$2
+FLATPAK_REPO=$2                 # there's a dependency, generated file: #{FLATPAK_REPO}.flatpak
 
 printf "*** start building %s flatpak ***\n" "$FLATPAK_REPO"
 measure_time flatpak-builder --repo=repo --force-clean build "${FLATPAK_FILE}"
