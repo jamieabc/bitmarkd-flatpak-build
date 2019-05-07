@@ -5,8 +5,10 @@ ERROR_CODE=1
 
 source ~/.rvm/scripts/rvm
 
+tag=$1
+
 printf "generating bitmarkd flatpak file\n"
-ruby bitmarkd.rb
+ruby bitmarkd.rb "$tag"
 
 if [ "$?" != "$SUCCESS_CODE" ]; then
     printf "error generate bitmarkd flatpak file\n"
@@ -14,7 +16,7 @@ if [ "$?" != "$SUCCESS_CODE" ]; then
 fi
 
 printf "generating recorderd flatpak file\n"
-ruby recorderd.rb
+ruby recorderd.rb "$tag"
 
 if [ "$?" != "$SUCCESS_CODE" ]; then
     printf "error generate recorderd flatpak file\n"

@@ -4,14 +4,17 @@ require "open-uri"
 require 'pry'
 
 class BaseBuild
-  BITMARKD_GO_MOD_FILE =
-    "https://raw.githubusercontent.com" \
-    "/bitmark-inc" \
-    "/bitmarkd" \
-    "/master/go.mod".freeze
   TMP_FILE = "test".freeze
   GITHUB_DOWNLOAD_SITE = "https://codeload.github.com".freeze
   APP_PATH = "/app/src/github.com".freeze
+
+  def bitmarkd_go_mod_file
+    version = 'master'
+    if 0 == ARGV.length
+      version = ARGV[0]
+    end
+    "https://raw.githubusercontent.com/bitmark-inc/bitmarkd/#{version}/go.mod".freeze
+  end
 
   def method_not_implement
     "Method not implement"
@@ -95,7 +98,7 @@ class BaseBuild
   def package_shasum
     hsh = {}
     begin
-      open(BITMARKD_GO_MOD_FILE) do |file|
+      open(bitmarkd_go_mod_file) do |file|
         file.each do |line|
           truncated = line.strip.gsub(" // indirect", "")
           next unless /^(github|golang)/.match? truncated
