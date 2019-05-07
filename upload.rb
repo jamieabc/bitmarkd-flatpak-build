@@ -23,7 +23,7 @@ metadata = {
   'x-amz-meta-date' => Time.now.strftime("%Y-%d-%m"),
   'x-amz-meta-version' => ARGV[0]
 }
-content_type = 'application/x-www-form-urlencoded; charset=utf-8',
+content_type = 'application/x-www-form-urlencoded; charset=utf-8'
 
 puts "uploading file..."
 file = File.open(file_name, 'rb')
