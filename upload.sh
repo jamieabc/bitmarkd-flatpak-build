@@ -15,4 +15,4 @@ fi
 tag=$1
 
 ruby upload.rb "#{tag}" "$BITMARKD_FLATPAK_BUNDLE"
-ruby upload.rb "#{tag}" "RECORDERD_FLATPAK_BUNDLE"
+ruby upload.rb "#{tag}" "$RECORDERD_FLATPAK_BUNDLE"
