@@ -80,11 +80,52 @@ class BitmarkdBuild < BaseBuild
     }
   end
 
+  def zeromq4_module
+    {
+      :name => "zeromq4",
+      :sources => [
+        {
+          :type => "archive",
+          :url => "https://github.com/zeromq/libzmq/releases/download/v4.2.5/zeromq-4.2.5.tar.gz",
+          :sha256 => "cc9090ba35713d59bb2f7d7965f877036c49c5558ea0c290b0dcc6f2a17e489f"
+        }
+      ],
+     :buildsystem => "simple",
+     :'build-commands' => [
+       "./configure --prefix=/app",
+       "make install"
+     ]
+    }
+  end
+
+  def go_env_setup
+    {
+      :name => "goenv-setup",
+      :sources => [
+        {
+          :type => "script",
+          :commands => [
+            "export GOROOT=/app",
+            "export PATH=$PATH:$GOROOT/bin",
+            "export GOPATH=/app"
+          ],
+          :dest-filename => "enable.sh"
+        }
+      ],
+      :buildsystem => "simple",
+      :build-commands => [
+        "cp enable.sh /app"
+      ]
+    }
+  end
+
   def custom_modules
     truncated_url = "bitmark-inc/bitmarkd/tar.gz/#{@tag}"
     github_url = "github.com/#{truncated_url}"
     info = []
     info.push(libargon2_module)
+    info.push(zeromq4_module)
+    info.push(go_env_setup)
     info.push(module_info(github_url, url_file_shasum(truncated_url)))
     info.last[:"build-commands"].push(
       'go install github.com/bitmark-inc/bitmarkd/command/bitmarkd'
