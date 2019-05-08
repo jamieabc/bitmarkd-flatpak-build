@@ -73,6 +73,9 @@ class BitmarkdBuild < BaseBuild
         "cd phc-winner-argon2-20171227 && make",
         "cd phc-winner-argon2-20171227 && make install PREFIX=/app",
         "cd phc-winner-argon2-20171227 && mkdir -p /app/lib/pkgconfig",
+        "cd phc-winner-argon2-20171227 && sed -i -- 's/usr/app/g' libargon2.pc",
+        "cd phc-winner-argon2-20171227 && sed -i -- 's/@HOST_MULTIARCH@//g' libargon2.pc",
+        "cd phc-winner-argon2-20171227 && cp libargon2.pc /app/lib/pkgconfig"
       ]
     }
   end
