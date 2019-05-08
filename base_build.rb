@@ -251,4 +251,11 @@ class BaseBuild
 
     write_file(json)
   end
+
+  def self.check_arguments
+    if 1 != ARGV.length
+      puts "Please input tag version to build"
+      exit false
+    end
+  end
 end
