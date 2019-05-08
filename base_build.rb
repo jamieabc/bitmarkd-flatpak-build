@@ -4,7 +4,7 @@ require "open-uri"
 require 'pry'
 
 class BaseBuild
-  TMP_FILE = "test".freeze
+  TMP_FILE = "tmp".freeze
   GITHUB_DOWNLOAD_SITE = "https://codeload.github.com".freeze
   APP_PATH = "/app/src/github.com".freeze
 
@@ -33,6 +33,10 @@ class BaseBuild
   end
 
   def output_file
+    raise method_not_implement
+  end
+
+  def custom_modules
     raise method_not_implement
   end
 
@@ -152,8 +156,8 @@ class BaseBuild
     sha
   end
 
-  def github_download_url(full_path)
-    path = full_path
+  def github_download_url(github_url)
+    path = github_url
     path = path.gsub("golang.org/x", "golang") if %r{golang.org/x}.match? path
     path = path.gsub("github.com/", "")
     GITHUB_DOWNLOAD_SITE + "/#{path}"
@@ -199,8 +203,8 @@ class BaseBuild
     }
   end
 
-  def extract_path_info(full_path)
-    _, organization, repo, _, version = full_path.split("/")
+  def extract_path_info(github_url)
+    _, organization, repo, _, version = github_url.split("/")
     {
       organization: organization,
       repo: repo,
@@ -209,12 +213,12 @@ class BaseBuild
     }
   end
 
-  def module_info(full_path, sha)
+  def module_info(github_url, sha)
     begin
-      info = extract_path_info(full_path)
+      info = extract_path_info(github_url)
       content = module_template
       content[:name] = info[:repo]
-      content[:sources].first[:url] = github_download_url(full_path)
+      content[:sources].first[:url] = github_download_url(github_url)
       content[:sources].first[:sha256] = sha
       content[:"build-commands"] = build_commands(info)
       content
@@ -228,9 +232,11 @@ class BaseBuild
     puts "generate flatpak config json file..."
     json = flatpak_content
     puts "get package sha-256 value"
-    package_shasum.each do |full_path, sha|
-      json[:modules].push(module_info(full_path, sha))
+    package_shasum.each do |github_url, sha|
+      json[:modules].push(module_info(github_url, sha))
     end
+
+    json[:modules].push(custom_modules)
 
     write_file(json)
   end

@@ -1,6 +1,10 @@
 require_relative "base_build"
 
 class BitmarkdBuild < BaseBuild
+  def initialize(tag)
+    @tag = tag
+  end
+
   def app_id
     "com.bitmark.bitmarkd"
   end
@@ -40,7 +44,22 @@ class BitmarkdBuild < BaseBuild
   def output_file
     "com.bitmark.bitmarkd.json"
   end
+
+  def custom_modules
+    truncated_url = "bitmark-inc/bitmarkd/tar.gz/#{@tag}"
+    github_url = "github.com/#{truncated_url}"
+    info = module_info(github_url, url_file_shasum(truncated_url))
+    info[:"build-commands"].push(
+      'go install github.com/bitmark-inc/bitmarkd/command/bitmarkd'
+    )
+    info
+  end
 end
 
-bitmarkd = BitmarkdBuild.new
+if 1 != ARGV.length
+  puts "Please input tag version to build"
+  exit false
+end
+
+bitmarkd = BitmarkdBuild.new ARGV[0]
 bitmarkd.build
