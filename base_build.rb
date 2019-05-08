@@ -194,7 +194,7 @@ class BaseBuild
   end
 
   def build_commands(hsh)
-    src_repo = hsh[:repo] == 'x' ? 'golang.org' : 'github.com'
+    src_repo = hsh[:organization] == 'x' ? 'golang.org' : 'github.com'
     [
       "tar zxf #{hsh[:version]}",
       "mkdir -p #{GITHUB_APP_PATH}/#{hsh[:organization]}",
