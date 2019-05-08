@@ -110,7 +110,7 @@ class RecorderdBuild < BaseBuild
         }
       ],
       :buildsystem => "simple",
-      :build-commands => [
+      :'build-commands' => [
         "cp enable.sh /app"
       ]
     }
