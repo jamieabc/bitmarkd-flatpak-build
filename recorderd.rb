@@ -46,8 +46,7 @@ class RecorderdBuild < BaseBuild
   def additional_module_shasum
     hsh = {}
     [
-      'github.com/cihub/seelog v0.0.0-20170130134532-f561c5e57575',
-      'golang.org/x/crypto v0.0.0-20190506204251-e1dfcc566284'
+      'github.com/cihub/seelog v0.0.0-20170130134532-f561c5e57575'
     ].each do |m|
       github_url = pkg_url(m)
       hsh[github_url] = url_file_shasum(github_url)
