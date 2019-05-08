@@ -247,7 +247,7 @@ class BaseBuild
       json[:modules].push(module_info(github_url, sha))
     end
 
-    json[:modules].push(custom_modules)
+    json[:modules].concat(custom_modules)
 
     write_file(json)
   end

@@ -54,13 +54,34 @@ class RecorderdBuild < BaseBuild
     hsh
   end
 
+  def libargon2_module
+    {
+      :name => 'libargon2',
+      :sources => [
+        {
+          :type => "file",
+          :url => "https://codeload.github.com/P-H-C/phc-winner-argon2/tar.gz/20171227",
+          :sha256 => "eaea0172c1f4ee4550d1b6c9ce01aab8d1ab66b4207776aa67991eb5872fdcd8"
+        }
+      ],
+      :buildsystem => "simple",
+      :'build-commands' => [
+        "tar zxf 20171227",
+        "cd phc-winner-argon2-20171227 && make",
+        "cd phc-winner-argon2-20171227 && make install PREFIX=/app",
+        "cd phc-winner-argon2-20171227 && mkdir -p /app/lib/pkgconfig",
+      ]
+    }
+  end
 
   def custom_modules
     truncated_url = "bitmark-inc/bitmarkd/tar.gz/#{@tag}"
     github_url = "github.com/#{truncated_url}"
-    info = module_info(github_url, url_file_shasum(truncated_url))
-    info[:"build-commands"].push(
-      'go install github.com/bitmark-inc/bitmarkd/command/recorderd'
+    info = []
+    info.push(libargon2_module)
+    info.push(module_info(github_url, url_file_shasum(truncated_url)))
+    info.last[:"build-commands"].push(
+      'go install github.com/bitmark-inc/bitmarkd/command/bitmarkd'
     )
     info
   end
