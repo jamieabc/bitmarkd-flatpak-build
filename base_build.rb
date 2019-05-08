@@ -6,7 +6,8 @@ require 'pry'
 class BaseBuild
   TMP_FILE = "tmp".freeze
   GITHUB_DOWNLOAD_SITE = "https://codeload.github.com".freeze
-  APP_PATH = "/app/src/github.com".freeze
+  SRC_PATH = '/app/src'.freeze
+  GITHUB_APP_PATH = "#{SRC_PATH}/github.com".freeze
 
   def bitmarkd_go_mod_file
     version = 'master'
@@ -193,10 +194,11 @@ class BaseBuild
   end
 
   def build_commands(hsh)
+    src_repo = hsh[:repo] == 'x' ? 'golang.org' : 'github.com'
     [
       "tar zxf #{hsh[:version]}",
-      "mkdir -p #{APP_PATH}/#{hsh[:organization]}",
-      "mv #{hsh[:dir]} #{APP_PATH}/#{hsh[:organization]}/#{hsh[:repo]}"
+      "mkdir -p #{GITHUB_APP_PATH}/#{hsh[:organization]}",
+      "mv #{hsh[:dir]} #{SRC_PATH}/#{src_repo}/#{hsh[:organization]}/#{hsh[:repo]}"
     ]
   end
 
