@@ -129,9 +129,15 @@ class BaseBuild
 
   def extract_go_pkg_info(str)
     package, version = str.split(" ")
-    if compound_version? version
-      commit_hash = version.split("-").last
-      return [package, commit_hash]
+    begin
+      if compound_version? version
+        commit_hash = version.split("-").last
+        return [package, commit_hash]
+      end
+    rescue => e
+      msg = "string #{str} extract with error: #{e}"
+      puts msg
+      raise msg
     end
     [package, version]
   end
