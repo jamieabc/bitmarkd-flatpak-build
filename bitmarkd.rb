@@ -47,10 +47,12 @@ class BitmarkdBuild < BaseBuild
 
   def additional_module_shasum
     hsh = {}
-    %w(github.com/cihub/seelog
-        golang.org/x/crypto/ed25519
-        golang.org/x/crypto/sha3
-        golang.org/x/time/rate).each do |m|
+    [
+      'github.com/cihub/seelog v0.0.0-20170130134532-f561c5e57575',
+     # 'golang.org/x/crypto/ed25519',
+     # 'golang.org/x/crypto/sha3',
+     # 'golang.org/x/time/rate'
+    ].each do |m|
       github_url = pkg_url(m)
       hsh[github_url] = url_file_shasum(github_url)
     end
