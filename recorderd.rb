@@ -106,7 +106,7 @@ class RecorderdBuild < BaseBuild
             "export PATH=$PATH:$GOROOT/bin",
             "export GOPATH=/app"
           ],
-          :dest-filename => "enable.sh"
+          :'dest-filename' => "enable.sh"
         }
       ],
       :buildsystem => "simple",
