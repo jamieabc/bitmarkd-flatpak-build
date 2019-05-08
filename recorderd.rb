@@ -1,6 +1,10 @@
 require_relative "base_build"
 
 class RecorderdBuild < BaseBuild
+  def initialize(tag)
+    @tag = tag
+  end
+
   def app_id
     "com.bitmark.recorderd"
   end
