@@ -216,7 +216,7 @@ class BaseBuild
   def extract_path_info(github_url)
     _, organization, repo, _, version = github_url.split("/")
     {
-      organization: organization,
+      organization: repo == 'x' ? 'golang.org' : organization,
       repo: repo,
       version: version,
       dir: extracted_directory_name(repo, version)
