@@ -40,6 +40,10 @@ class BaseBuild
     raise method_not_implement
   end
 
+  def additional_module_shasum
+    raise method_not_implement
+  end
+
   def golang_binary_source
     [
       {
@@ -107,8 +111,8 @@ class BaseBuild
           truncated = line.strip.gsub(" // indirect", "")
           next unless /^(github|golang)/.match? truncated
 
-          url = pkg_url(truncated)
-          hsh[url] = url_file_shasum(url)
+          github_url = pkg_url(truncated)
+          hsh[github_url] = url_file_shasum(github_url)
         end
       end
     rescue => e
@@ -232,7 +236,7 @@ class BaseBuild
     puts "generate flatpak config json file..."
     json = flatpak_content
     puts "get package sha-256 value"
-    package_shasum.each do |github_url, sha|
+    package_shasum.merge(additional_module_shasum).each do |github_url, sha|
       json[:modules].push(module_info(github_url, sha))
     end
 

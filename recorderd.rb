@@ -43,6 +43,19 @@ class RecorderdBuild < BaseBuild
     "com.bitmark.recorderd.json"
   end
 
+  def additional_module_shasum
+    hsh = {}
+    %w(github.com/cihub/seelog
+        golang.org/x/crypto/ed25519
+        golang.org/x/crypto/sha3
+        golang.org/x/time/rate).each do |m|
+      github_url = pkg_url(m)
+      hsh[github_url] = url_file_shasum(github_url)
+    end
+    hsh
+  end
+
+
   def custom_modules
     truncated_url = "bitmark-inc/bitmarkd/tar.gz/#{@tag}"
     github_url = "github.com/#{truncated_url}"
