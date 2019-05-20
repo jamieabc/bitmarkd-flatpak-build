@@ -73,8 +73,7 @@ class BaseBuild
       "sdk": "org.freedesktop.Sdk",
       "runtime-version": "1.6",
       "cleanup": [
-        "/usr/lib/sdk/golang",
-        "/app/src"
+        "/usr/lib/sdk/golang"
       ],
      "command": "run.sh"
     }
