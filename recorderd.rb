@@ -48,12 +48,13 @@ class RecorderdBuild < BaseBuild
 
   def custom_modules
     modules = preset_common_modules
+    version = @tag.delete('v')
 
     truncated_url = "bitmark-inc/bitmarkd/tar.gz/#{@tag}"
     github_url = "github.com/#{truncated_url}"
     modules.push(module_info(github_url, url_file_shasum(truncated_url)))
     modules.last[:"build-commands"].push(
-      'go install github.com/bitmark-inc/bitmarkd/command/recorderd'
+      "go install -ldflags '-X main.version=#{version}' github.com/bitmark-inc/bitmarkd/command/recorderd"
     )
     modules
   end
