@@ -19,8 +19,6 @@ flatpak --user install -y bitmarkd.flatpak
 
 # create bitmarkd data directory
 mkdir -p bitmarkd-data
-https://raw.githubusercontent.com/jamieabc/bitmarkd-flatpak-build/master/test-scripts/upload.sh
-
-mv bitmarkd.conf bitmarkd-data/
+cp bitmarkd.conf bitmarkd-data/
 flatpak run com.bitmark.bitmarkd --init
 flatpak run com.bitmark.bitmarkd
