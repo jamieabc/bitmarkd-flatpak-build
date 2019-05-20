@@ -7,8 +7,8 @@ result=$SUCCESS_CODE
 help() {
     printf "Usage:\n"
     printf "build.sh [file] [repo-name]\n"
-    printf "file: flatpak json file'"
-    printf "repo-name: repository name, e.g. bitmarkd, recorderd, etc."
+    printf "file: flatpak json file'\n"
+    printf "repo-name: repository name, e.g. bitmarkd, recorderd, etc.\n"
 }
 
 check_execution() {
