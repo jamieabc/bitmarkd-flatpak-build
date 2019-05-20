@@ -9,4 +9,4 @@ rvm install ruby-2.6.3
 rvm alias create default ruby-2.6.3
 
 # install packages
-gem install -y crack ap pry json
+gem install crack ap pry json
