@@ -5,6 +5,15 @@ ERROR_CODE=1
 
 source ~/.rvm/scripts/rvm
 
+help() {
+    printf "Usage: generate-flatpak.sh tag\n"
+}
+
+if [ "$1" = "" ]; then
+    help
+    exit "$ERROR_CODE"
+fi
+
 tag=$1
 
 printf "generating bitmarkd flatpak file\n"
