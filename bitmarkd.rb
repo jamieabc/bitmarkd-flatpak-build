@@ -30,8 +30,11 @@ class BitmarkdBuild < BaseBuild
             "bitmarkd --config-file=./bitmarkd-data/bitmarkd.conf gen-peer-identity",
             "bitmarkd --config-file=./bitmarkd-data/bitmarkd.conf gen-rpc-cert",
             "bitmarkd --config-file=./bitmarkd-data/bitmarkd.conf gen-proof-identity",
-            "fi",
-            "bitmarkd --config-file=./bitmarkd-data/bitmarkd.conf"
+            "elif [ $1 ] && [ \"$1\" != '--init' ]; then",
+            "bitmarkd $*",
+            "elif [ $# -eq 0 ]; then",
+            "bitmarkd --config-file=./bitmarkd-data/bitmarkd.conf",
+            "fi"
           ],
           "dest-filename": "run.sh"
         }
