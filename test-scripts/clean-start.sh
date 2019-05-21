@@ -15,10 +15,11 @@ flatpak install -y flathub org.freedesktop.Platform//1.6 org.freedesktop.Sdk//1.
 
 # install bitmarkd flatpak binary
 wget https://s3-ap-northeast-1.amazonaws.com/bitmarkd-flatpak/bitmarkd.flatpak
+# flatpak uninstall -y com.bitmark.bitmarkd
 flatpak --user install -y bitmarkd.flatpak
 
 # create bitmarkd data directory
-mkdir -p bitmarkd-data
-cp bitmarkd.conf bitmarkd-data/
+mkdir -p ~/bitmarkd-data
+cp bitmarkd.conf ~/bitmarkd-data/
 flatpak run com.bitmark.bitmarkd --init
 flatpak run com.bitmark.bitmarkd
