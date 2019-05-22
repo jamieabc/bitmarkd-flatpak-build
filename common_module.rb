@@ -12,11 +12,13 @@ module Common
       :buildsystem => "simple",
      :'build-commands' => [
         "tar zxf 20171227",
-        "cd phc-winner-argon2-20171227 && make",
+        "cd phc-winner-argon2-20171227 && make OPTTARGET=generic && make test",
         "cd phc-winner-argon2-20171227 && make install PREFIX=/app",
-        "cd phc-winner-argon2-20171227 && mkdir -p /app/lib/pkgconfig",
         "cd phc-winner-argon2-20171227 && sed -i -- 's/usr/app/g' libargon2.pc",
-        "cd phc-winner-argon2-20171227 && sed -i -- 's/@HOST_MULTIARCH@//g' libargon2.pc",
+        "cd phc-winner-argon2-20171227 && sed -i -- 's/\\/@HOST_MULTIARCH@//g' libargon2.pc",
+        "cd phc-winner-argon2-20171227 && sed -i -- 's/@UPSTREAM_VER@/20171227/g' libargon2.pc",
+        "cd phc-winner-argon2-20171227 && sed -i -- 's/Cflags:/Cflags: -I${includedir}/g' libargon2.pc",
+        "cd phc-winner-argon2-20171227 && mkdir -p /app/lib/pkgconfig",
         "cd phc-winner-argon2-20171227 && cp libargon2.pc /app/lib/pkgconfig"
       ]
     }
