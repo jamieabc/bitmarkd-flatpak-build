@@ -26,12 +26,13 @@ if [ "$?" != "$SUCCESS_CODE" ]; then
     exit "$ERROR_CODE"
 fi
 
-printf "generating recorderd flatpak file\n"
-ruby recorderd.rb "$tag"
+# temporarily disable recorderd
+# printf "generating recorderd flatpak file\n"
+# ruby recorderd.rb "$git_tag"
 
-if [ "$?" != "$SUCCESS_CODE" ]; then
-    printf "error generate recorderd flatpak file\n"
-    exit "$ERROR_CODE"
-fi
+# if [ "$?" != "$SUCCESS_CODE" ]; then
+#     printf "error generate recorderd flatpak file\n"
+#     exit "$ERROR_CODE"
+# fi
 
 exit "$SUCCESS_CODE"

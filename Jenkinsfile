@@ -41,7 +41,8 @@ node (label: "aws-builder") {
             // build.sh has a dependency: output file is (second argument).flatpak
             // e.g. bitmarkd => bitmarkd.flatpak
             sh "./build.sh ${bitmarkd_flatpak_file} bitmarkd"
-            sh "./build.sh ${recorderd_flatpak_file} recorderd"
+            // temporarily disable recorderd, also commented in generate-flatpak.sh
+            // sh "./build.sh ${recorderd_flatpak_file} recorderd"
         }
     }
 
