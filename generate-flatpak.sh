@@ -6,19 +6,20 @@ ERROR_CODE=1
 source ~/.rvm/scripts/rvm
 
 help() {
-    printf "Usage: generate-flatpak.sh tag\n"
-    printf "\ttag: github tag number, e.g. v0.10.6"
+    printf "Usage: generate-flatpak.sh git_tag\n"
+    printf "\tgit_tag: github tag string, e.g. v0.10.6"
 }
 
-if [ "$1" = "" ]; then
+if [ $# -eq 0 ]; then
     help
     exit "$ERROR_CODE"
 fi
 
-tag=$1
+# git git_tag string
+git_tag=$1
 
 printf "generating bitmarkd flatpak file\n"
-ruby bitmarkd.rb "$tag"
+ruby bitmarkd.rb "$git_tag"
 
 if [ "$?" != "$SUCCESS_CODE" ]; then
     printf "error generate bitmarkd flatpak file\n"
