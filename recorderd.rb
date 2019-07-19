@@ -27,11 +27,11 @@ class RecorderdBuild < BaseBuild
           "type": "script",
           "commands": [
             "if [ $1 ] && [ \"$1\" = '--init' ]; then",
-            "recorderd --config-file=./recorderd-data/recorderd.conf generate-identity",
+            "recorderd --config-file=./recorderd.conf generate-identity",
             "elif [ $1 ] && [ \"$1\" != '--init' ]; then",
             "recorderd $*",
             "elif [ $# -eq 0 ]; then",
-            "recorderd --config-file=./recorderd-data/recorderd.conf",
+            "recorderd --config-file=./recorderd.conf",
             "fi"
           ],
           "dest-filename": "run.sh"

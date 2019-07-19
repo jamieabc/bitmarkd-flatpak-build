@@ -27,14 +27,14 @@ class BitmarkdBuild < BaseBuild
           "type": "script",
           "commands": [
             "if [ $1 ] && [ \"$1\" = '--init' ]; then",
-            "bitmarkd --config-file=./bitmarkd-data/bitmarkd.conf gen-peer-identity",
-            "bitmarkd --config-file=./bitmarkd-data/bitmarkd.conf gen-rpc-cert",
-            "bitmarkd --config-file=./bitmarkd-data/bitmarkd.conf gen-proof-identity",
+            "bitmarkd --config-file=./bitmarkd.conf gen-peer-identity",
+            "bitmarkd --config-file=./bitmarkd.conf gen-rpc-cert",
+            "bitmarkd --config-file=./bitmarkd.conf gen-proof-identity",
             "elif [ $1 ] && [ \"$1\" = 'script' ]; then",
             "shift",
             "$*",
             "elif [ $# -eq 0 ]; then",
-            "bitmarkd --config-file=./bitmarkd-data/bitmarkd.conf",
+            "bitmarkd --config-file=./bitmarkd.conf",
             "fi"
           ],
           "dest-filename": "run.sh"
