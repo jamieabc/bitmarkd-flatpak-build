@@ -6,9 +6,9 @@ result=$SUCCESS_CODE
 
 help() {
     printf "Usage:\n"
-    printf "build.sh [file] [repo-name]\n"
-    printf "file: flatpak json file, e.g. com.bitmark.bitmarkd.json'\n"
-    printf "repo-name: repository name, e.g. bitmarkd, recorderd, etc.\n"
+    printf "\tbuild.sh [flatpak json file] [repo-name]\n"
+    printf "\tflatpak json file: file for flatpak to build e.g. com.bitmark.bitmarkd.json\n"
+    printf "\trepo-name: repository name, e.g. bitmarkd, recorderd, etc.\n"
 }
 
 check_execution() {

@@ -7,7 +7,7 @@ source ~/.rvm/scripts/rvm
 
 help() {
     printf "Usage: generate-flatpak.sh git_tag\n"
-    printf "\tgit_tag: github tag string, e.g. v0.10.6"
+    printf "\tgit_tag: github tag string, e.g. v0.10.6, master, etc.\n"
 }
 
 if [ $# -eq 0 ]; then
