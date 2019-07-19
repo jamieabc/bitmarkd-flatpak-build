@@ -138,7 +138,13 @@ class BaseBuild
       puts msg
       raise msg
     end
-    [package, version]
+    [package, truncate_redundant_version_str(version)]
+  end
+
+  # version string can be v2.1.0+incompatible, remove +incompatible
+  # the incompatible comes from specific package does not use go module
+  def truncate_redundant_version_str(str)
+    str.gsub(/\+.*$/, '')
   end
 
   def compound_version?(str)
