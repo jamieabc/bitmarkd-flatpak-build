@@ -75,7 +75,7 @@ class BaseBuild
       "cleanup": [
         "/usr/lib/sdk/golang"
       ],
-     "command": "run.sh"
+      "command": "run.sh"
     }
   end
 

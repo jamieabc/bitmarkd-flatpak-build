@@ -52,7 +52,7 @@ class BitmarkdBuild < BaseBuild
 
   def custom_modules
     modules = preset_common_modules
-    version = @tag.delete('v')
+    # version = @tag.delete('v')
 
     truncated_url = "bitmark-inc/bitmarkd/tar.gz/#{@tag}"
     github_url = "github.com/#{truncated_url}"
