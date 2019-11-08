@@ -1,6 +1,7 @@
 require_relative "base_build"
 require_relative "common_module"
 
+# flatpak build bitmarkd
 class BitmarkdBuild < BaseBuild
   include Common
 
@@ -13,10 +14,7 @@ class BitmarkdBuild < BaseBuild
   end
 
   def finish_args
-    [
-      "--share=network",
-      "--filesystem=~/bitmarkd-data:create"
-    ]
+    %w[--share=network --filesystem=~/bitmarkd-data:create]
   end
 
   def run_script_module
