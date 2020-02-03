@@ -58,7 +58,7 @@ class BitmarkdBuild < BaseBuild
     github_url = "github.com/#{truncated_url}"
     modules.push(module_info(github_url, url_file_shasum(truncated_url)))
     modules.last[:"build-commands"].push(
-      "go install -ldflags '-X main.version=#{version}' github.com/bitmark-inc/bitmarkd/command/bitmarkd"
+      "export GOPATH=/app && /app/go/bin/go install -ldflags '-X main.version=#{version}' github.com/bitmark-inc/bitmarkd/command/bitmarkd"
     )
     modules
   end

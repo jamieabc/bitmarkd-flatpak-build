@@ -60,8 +60,9 @@ class BaseBuild
       "buildsystem": "simple",
       "sources": golang_binary_source,
       "build-commands": [
-        "install -d /app",
-        "cp -rpv * /app"
+        "mkdir -p /app/go",
+        "install -d /app/go",
+        "cp -rpv * /app/go"
       ]
     }
   end

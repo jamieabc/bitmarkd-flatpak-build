@@ -77,7 +77,9 @@ module Common
       'github.com/cihub/seelog v0.0.0-20170130134532-f561c5e57575',
       'github.com/btcsuite/btcutil v0.0.0-20190425235716-9e5f4b9a998d',
       'github.com/btcsuite/go-socks v0.0.0-20170105172521-4720035b7bfd',
-      'github.com/btcsuite/btclog v0.0.0-20170628155309-84c8d2346e9f'
+      'github.com/btcsuite/btclog v0.0.0-20170628155309-84c8d2346e9f',
+      'github.com/davecgh/go-spew v0.0.0-20171005155431-ecdeabc65495',
+      'github.com/golang/protobuf v1.2.0'
     ].each do |m|
       github_url = pkg_url(m)
       hsh[github_url] = url_file_shasum(github_url)
