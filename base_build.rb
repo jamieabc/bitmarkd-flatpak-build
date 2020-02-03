@@ -48,8 +48,8 @@ class BaseBuild
     [
       {
         "type": "archive",
-        "url": "https://dl.google.com/go/go1.12.4.linux-amd64.tar.gz",
-        "sha256": "d7d1f1f88ddfe55840712dc1747f37a790cbcaa448f6c9cf51bbe10aa65442f5"
+        "url": "https://dl.google.com/go/go1.13.7.linux-amd64.tar.gz",
+        "sha256": "b3dd4bd781a0271b33168e627f7f43886b4c5d1c794a4015abf34e99c6526ca3"
       }
     ]
   end
